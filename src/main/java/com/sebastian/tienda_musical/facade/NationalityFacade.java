@@ -1,6 +1,8 @@
 package com.sebastian.tienda_musical.facade;
 
 import com.sebastian.tienda_musical.entity.NationalityEntity;
+import com.sebastian.tienda_musical.model.nationality.dto.Nationality;
+import com.sebastian.tienda_musical.model.nationality.mapper.NationalityMapper;
 import com.sebastian.tienda_musical.service.iface.CrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,22 +13,27 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class NationalityFacade {
+
     private final CrudService<NationalityEntity, Integer> nationalityCrud;
+    private final NationalityMapper mapper;
 
-    public void create(NationalityEntity nationality) {
-        nationalityCrud.create(nationality);
+    public void create(Nationality dto) {
+        nationalityCrud.create(mapper.toEntity(dto));
     }
 
-    public List<NationalityEntity> getAll() {
-        return nationalityCrud.getAll();
+    public List<Nationality> getAll() {
+        return mapper.toDtoList(nationalityCrud.getAll());
     }
 
-    public Optional<NationalityEntity> getById(Integer id) {
-        return nationalityCrud.getById(id);
+    public Optional<Nationality> getById(Integer id) {
+        return nationalityCrud.getById(id).map(mapper::toDto);
     }
 
-    public void update(NationalityEntity nationality, Integer id) {
-        nationalityCrud.update(nationality, id);
+    public void update(Nationality dto, Integer id) {
+        nationalityCrud.getById(id).ifPresent(entity -> {
+            mapper.updateEntityFromDto(dto, entity);
+            nationalityCrud.update(entity, id);
+        });
     }
 
     public void delete(Integer id) {

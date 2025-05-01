@@ -40,9 +40,7 @@ public class NationalityCrudService implements CrudService<NationalityEntity, In
 
     @Override
     public void update(NationalityEntity entity, Integer id) {
-        if (getById(id).isPresent()) {
-            nationalityRepository.save(entity);
-        }
+        nationalityRepository.save(entity);
     }
 
     @Override
