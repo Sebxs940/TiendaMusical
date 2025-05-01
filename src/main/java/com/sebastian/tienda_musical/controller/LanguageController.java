@@ -1,6 +1,5 @@
 package com.sebastian.tienda_musical.controller;
 
-import com.sebastian.tienda_musical.entity.GenderEntity;
 import com.sebastian.tienda_musical.entity.LanguageEntity;
 import com.sebastian.tienda_musical.service.iface.CrudService;
 import lombok.RequiredArgsConstructor;
@@ -10,36 +9,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gender")
+@RequestMapping("/language")
 @RequiredArgsConstructor
-public class GenderController {
-    private final CrudService<GenderEntity, Integer> crudGender;
+public class LanguageController {
+    private final CrudService<LanguageEntity, Integer> crudLanguage;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody GenderEntity gender){
-        crudGender.create(gender);
+    public ResponseEntity create(@RequestBody LanguageEntity language){
+        crudLanguage.create(language);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<GenderEntity>> getGender(){
-        return ResponseEntity.ok(crudGender.getAll());
+    public ResponseEntity<List<LanguageEntity>> getLanguage(){
+        return ResponseEntity.ok(crudLanguage.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GenderEntity> getGenderById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(crudGender.getById(id).get());
+    public ResponseEntity<LanguageEntity> getLanguageById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(crudLanguage.getById(id).get());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@RequestBody GenderEntity gender, @PathVariable("id") Integer id){
-        crudGender.update(gender, id);
+    public ResponseEntity update(@RequestBody LanguageEntity language, @PathVariable("id") Integer id){
+        crudLanguage.update(language, id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Integer id){
-        crudGender.delete(id);
+        crudLanguage.delete(id);
         return ResponseEntity.ok().build();
     }
 }
