@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gender")
+@RequestMapping("/genders")
 @RequiredArgsConstructor
 public class GenderController {
     private final CrudService<GenderEntity, Integer> crudGender;
@@ -21,7 +21,7 @@ public class GenderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GenderEntity>> getGender(){
+    public ResponseEntity<List<GenderEntity>> getGenders(){
         return ResponseEntity.ok(crudGender.getAll());
     }
 
