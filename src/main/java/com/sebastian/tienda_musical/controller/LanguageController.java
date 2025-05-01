@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/language")
+@RequestMapping("/languages")
 @RequiredArgsConstructor
 public class LanguageController {
     private final CrudService<LanguageEntity, Integer> crudLanguage;
@@ -21,12 +21,12 @@ public class LanguageController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LanguageEntity>> getLanguage(){
+    public ResponseEntity<List<LanguageEntity>> getLanguages(){
         return ResponseEntity.ok(crudLanguage.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LanguageEntity> getLanguageById(@PathVariable("id") Integer id) {
+    public ResponseEntity<LanguageEntity> getLanguagesById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(crudLanguage.getById(id).get());
     }
 
