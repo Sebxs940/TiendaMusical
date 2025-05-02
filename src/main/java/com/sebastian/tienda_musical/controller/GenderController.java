@@ -2,6 +2,7 @@ package com.sebastian.tienda_musical.controller;
 
 import com.sebastian.tienda_musical.entity.GenderEntity;
 import com.sebastian.tienda_musical.facade.GenderFacade;
+import com.sebastian.tienda_musical.model.gender.dto.Gender;
 import com.sebastian.tienda_musical.service.iface.CrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,13 @@ public class GenderController {
     private final GenderFacade genderFacade;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody GenderEntity gender){
+    public ResponseEntity create(@RequestBody Gender gender){
         genderFacade.create(gender);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<GenderEntity>> getGenders(){
+    public ResponseEntity<List<Gender>> getGenders(){
         return ResponseEntity.ok(genderFacade.getAll());
     }
 
@@ -32,7 +33,7 @@ public class GenderController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@RequestBody GenderEntity gender, @PathVariable("id") Integer id){
+    public ResponseEntity update(@RequestBody Gender gender, @PathVariable("id") Integer id){
         genderFacade.update(gender, id);
         return ResponseEntity.ok().build();
     }
